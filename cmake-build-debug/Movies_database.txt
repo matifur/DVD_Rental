@@ -1,6 +1,7 @@
-John_wick,Rezyser_Kozak,2016,0,Jan,Macierewicz,730277307
+John_wick,Rezyser_Kozak,2016,1,empty,empty,empty
 Fajny_film,Autor,2010,1,empty,empty,empty
 Kozacki_film,Autor,2010,1,empty,empty,empty
 Diuna,kozak,2019,1,empty,empty,empty
 Baby_Driver,Zajebisty,2016,1,empty,empty,empty
 Bibliografia_Korwina,Korwin,2023,1,empty,empty,empty
+Gasnica,Grzegorz_Braun,2023,1,empty,empty,empty

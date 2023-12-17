@@ -8,7 +8,7 @@
 #include "Movie.h"
 #include "RentalRecord.h"
 
-
+//Klasa zajmuje się zapisywaniem odczytywaniem i zarządzaniem danymi używanymi przez program.
 class DVD_Database {
 private:
     vector<RentalRecord> films;
@@ -18,21 +18,29 @@ public:
         loadFromFile();
     }
 
+    //Pozwala na dodanie filmu do naszej bazy danych
     void addMovie(const RentalRecord& film) {
         films.push_back(film);
+        cout << " >> Film zostal poprawnie dodany do bazy danych." << endl;
         saveToFile();
     }
 
+    //Usuwa wybrany film z bazy danych
     void removeMovie(const string& title) {
         loadFromFile();
         for (auto it = films.begin(); it != films.end(); ++it) {
             if (it->get_title()== title ) {
                 films.erase(it);
-                break;
+                cout << " >> Film zostal usuniety z bazy danych.\n" << endl;
+                saveToFile();
+                return;
             }
         }
+        cout << "ERROR: Nie znaleziono filmu\n" << endl;
+        return;
     }
 
+    //Zmienia status filmu z wyporzyczony na dostępny
     void ReturnMovie(const string& ret_title) {
         loadFromFile();
         for (auto it = films.begin(); it != films.end(); ++it) {
@@ -42,11 +50,16 @@ public:
                 it -> set_name("empty");
                 it -> set_surname("empty");
                 it -> set_phone("empty");
-                break;
+                cout << " >> Film zostal poprawnie zwrocony.\n" << endl;
+                saveToFile();
+                return;
             }
         }
-        saveToFile();
+        cout << "ERROR: Nie znaleziono filmu.\n" << endl;
+        return;
     }
+
+    //Zmienia status filmu z dostępny na wyporzyczony
     void BorrowMovie(const string& borr_title, const string& name, const string& surname, const string& phone) {
         loadFromFile();
         for (auto it = films.begin(); it != films.end(); ++it) {
@@ -56,12 +69,16 @@ public:
                 it -> set_name(name);
                 it -> set_surname(surname);
                 it -> set_phone(phone);
-                break;
+                cout << " >> Film zostal poprawnie wyporzyczony.\n" << endl;
+                saveToFile();
+                return;
             }
         }
-        saveToFile();
+        cout << "ERROR: Nie znaleziono filmu.\n" << endl;
+        return;
     }
 
+    //Wyświetla wszystkie filmy z osobami które go wyporzyczyły
     void displayAllMovies() {
         loadFromFile();
         cout << " --------------- WSZYSTKIE FILMY -------------- \n" << endl;
@@ -71,6 +88,7 @@ public:
         cout << endl;
     }
 
+    //Wyświetla wszystkie dostępne do wyporzyczenia filmy
     void displayAviableMovies() {
         loadFromFile();
         cout << " --------------- DOSTEPNE FILMY -------------- " << endl;
@@ -81,14 +99,16 @@ public:
         cout << endl;
     }
 
+    //Wyświetla wszystkie wyporzyczone filmy
     void displayNotAviableMovies() {
         loadFromFile();
-        cout << "-------------- NIE DOSTEPNE FILMY ------------" << endl;
+        cout << "-------------- NIEDOSTEPNE FILMY ------------" << endl;
         for (const RentalRecord& film : films) {
             film.display_not_available();
         }
     }
 
+    //Dokonuje zapisu do bazy danych plików w odpowiednim formacie
     bool saveToFile() const {
         ofstream file("Movies_database.txt");
         if (!file) {
@@ -105,6 +125,7 @@ public:
         return true;
     }
 
+    //Wczytuje wszystkie filmy z bazy danych do wektora klasy
     bool loadFromFile() {
         ifstream file("Movies_database.txt");
         if (!file) {

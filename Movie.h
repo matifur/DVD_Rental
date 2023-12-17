@@ -5,6 +5,7 @@
 #include <iostream>
 using namespace std;
 
+//Klasa Movie tworząca obiekty konkretnych DVD
 class Movie {
 private:
     string ftitle;

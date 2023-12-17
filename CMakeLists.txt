@@ -3,4 +3,4 @@ project(DVD_Rental)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(DVD_Rental main.cpp DVD_Database.h Movie.h admin_running.h client_running.h RentalRecord.h)
+add_executable(DVD_Rental main.cpp DVD_Database.h Movie.h admin_running.h client_running.h RentalRecord.h StringValidation.h)
