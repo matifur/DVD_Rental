@@ -6,7 +6,7 @@
 #include "DVD_Database.h"
 using namespace std;
 
-void client_running(const string& imie, const string& nazwisko, const string& telefon) {
+void client_running(const string& name, const string& surname, const string& phone) {
     DVD_Database database;
     bool running = true;
     string title_return;
@@ -37,16 +37,15 @@ void client_running(const string& imie, const string& nazwisko, const string& te
                 getline(cin, title_borrow);
                 if(title_borrow == "exit")
                     return;
-                database.setMovieNotAvailable(title_borrow);
+                database.BorrowMovie(title_borrow, name, surname, phone);
                 cout << "Film zostal wyporzyczony.\n" << endl;
                 break;
             case 3:
                 cout << "Podaj tytul filmu do oddania: ";
-                cin.ignore();
-                getline(cin, title_return);
+                cin >> title_return;
                 if(title_return == "exit")
                     return;
-                database.setMovieAvailable(title_return);
+                database.ReturnMovie(title_return);
                 cout << "Film oddany.\n" << endl;
                 break;
             case 4:

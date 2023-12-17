@@ -6,18 +6,19 @@
 #include <sstream>
 #include <vector>
 #include "Movie.h"
-using namespace std;
+#include "RentalRecord.h"
+
 
 class DVD_Database {
 private:
-    vector<Movie> films;
+    vector<RentalRecord> films;
 
 public:
     DVD_Database(){
         loadFromFile();
     }
 
-    void addMovie(const Movie& film) {
+    void addMovie(const RentalRecord& film) {
         films.push_back(film);
         saveToFile();
     }
@@ -32,21 +33,29 @@ public:
         }
     }
 
-    void setMovieAvailable(const string& title) {
+    void ReturnMovie(const string& ret_title) {
         loadFromFile();
         for (auto it = films.begin(); it != films.end(); ++it) {
-            if (it->get_title() == title ) {
+            if (it->get_title() == ret_title ) {
+                it -> set_title(ret_title);
                 it -> set_access(true);
+                it -> set_name("empty");
+                it -> set_surname("empty");
+                it -> set_phone("empty");
                 break;
             }
         }
         saveToFile();
     }
-    void setMovieNotAvailable(const string& title) {
+    void BorrowMovie(const string& borr_title, const string& name, const string& surname, const string& phone) {
         loadFromFile();
         for (auto it = films.begin(); it != films.end(); ++it) {
-            if (it->get_title() == title ) {
-                it ->set_access(false);
+            if (it->get_title() == borr_title ) {
+                it -> set_title(borr_title);
+                it -> set_access(false);
+                it -> set_name(name);
+                it -> set_surname(surname);
+                it -> set_phone(phone);
                 break;
             }
         }
@@ -55,26 +64,27 @@ public:
 
     void displayAllMovies() {
         loadFromFile();
-        cout << "Dane w formacie Tytul, Rezyser, Rok produkcji: \n" << endl;
-        for (const Movie& film : films) {
+        cout << " --------------- WSZYSTKIE FILMY -------------- \n" << endl;
+        for (const RentalRecord& film : films) {
             film.display_admin();
         }
+        cout << endl;
     }
 
     void displayAviableMovies() {
         loadFromFile();
         cout << " --------------- DOSTEPNE FILMY -------------- " << endl;
         cout << "Dane w formacie Tytul, Rezyser, Rok produkcji: \n" << endl;
-        for (const Movie& film : films) {
+        for (const RentalRecord& film : films) {
             film.display_available();
         }
+        cout << endl;
     }
 
     void displayNotAviableMovies() {
         loadFromFile();
         cout << "-------------- NIE DOSTEPNE FILMY ------------" << endl;
-        cout << "Dane w formacie Tytul, Rezyser, Rok produkcji: \n" << endl;
-        for (const Movie& film : films) {
+        for (const RentalRecord& film : films) {
             film.display_not_available();
         }
     }
@@ -86,8 +96,9 @@ public:
             return false;
         }
 
-        for (const Movie& film : films) {
-            file << film.get_title() << ',' << film.get_director() << ',' << film.get_year() << "," << film.get_access() << '\n';
+        for (const RentalRecord& film : films) {
+            file << film.get_title() << ',' << film.get_director() << ',' << film.get_year() << "," << film.get_access()
+                << ","<< film.get_name() << "," << film.get_surname() << "," << film.get_phone() << '\n';
         }
 
         file.close();
@@ -107,8 +118,8 @@ public:
         while (getline(file, line)) {
             string title, director;
             int year;
-            double rating;
             bool access;
+            string name, surname, phone;
 
             stringstream ss(line);
             getline(ss, title, ',');
@@ -116,8 +127,13 @@ public:
             ss >> year;
             ss.ignore();
             ss >> access;
+            ss.ignore();
+            getline(ss, name, ',');
+            getline(ss, surname, ',');
+            getline(ss, phone, ',');
 
-            Movie film(title, director, year,access);
+
+            RentalRecord film(title, director, year, access, name, surname, phone);
             films.push_back(film);
         }
 

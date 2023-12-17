@@ -23,7 +23,7 @@ int main() {
                 cin >> nazwisko;
                 cout << "Podaj numer telefonu: ";
                 cin >> telefon;
-                client_running();
+                client_running(imie, nazwisko, telefon);
                 break;
             case 3:
                 return 0;

@@ -9,6 +9,8 @@ using namespace std;
 void admin_running() {
     DVD_Database database;
     bool running = true;
+    int choice;
+    string client_title;
     while (running) {
         cout << "Menu:" << endl;
         cout << "1. Dodaj film" << endl;
@@ -16,10 +18,10 @@ void admin_running() {
         cout << "3. Wyswietl wszystkie filmy" << endl;
         cout << "4. Wyswietl dostepne filmy" << endl;
         cout << "5. Wyswietl niedostepne filmy" << endl;
-        cout << "6. Wyjdz" << endl;
+        cout << "6. Oddaj film" << endl;
+        cout << "7. Wyjdz" << endl;
         cout << "Wybierz opcje: ";
 
-        int choice;
         cin >> choice;
         system("CLS");
 
@@ -40,7 +42,7 @@ void admin_running() {
                 cin >> year;
 
 
-                Movie film(title, director, year, true);
+                RentalRecord film(title, director, year, true);
                 database.addMovie(film);
                 cout << "Film został dodany do bazy danych.\n" << endl;
                 break;
@@ -48,8 +50,7 @@ void admin_running() {
             case 2: {
                 string title;
                 cout << "Podaj tytul filmu do usunięcia: ";
-                cin.ignore();
-                getline(cin, title);
+                cin >> title;
                 if(title == "exit")
                     return;
                 database.removeMovie(title);
@@ -69,6 +70,11 @@ void admin_running() {
                 database.displayNotAviableMovies();
                 break;
             case 6:
+                cout << "Podaj tytuł filmu: ";
+                cin >> client_title;
+                database.ReturnMovie(client_title);
+                break;
+            case 7:
                 return;
             default:
                 cout << "Nieprawidłowa opcja. Wybierz ponownie." << endl;
