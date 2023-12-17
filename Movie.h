@@ -5,6 +5,7 @@
 #include <iostream>
 using namespace std;
 
+//Zmiana
 class Movie {
 private:
     string ftitle;
