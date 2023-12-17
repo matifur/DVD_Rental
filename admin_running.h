@@ -16,7 +16,7 @@ void admin_running() {
     DVD_Database database;
     bool running = true;
     int choice;
-    string client_title;
+    string client_title, category, name_search, surname_search, title_search;
     while (running) {
         cout << "Menu:" << endl;
         cout << "1. Dodaj film" << endl;
@@ -25,7 +25,8 @@ void admin_running() {
         cout << "4. Wyswietl dostepne filmy" << endl;
         cout << "5. Wyswietl niedostepne filmy" << endl;
         cout << "6. Oddaj film klienta" << endl;
-        cout << "7. Wyjdz" << endl;
+        cout << "7. SZUKAJ" << endl;
+        cout << "8. Wyjdz" << endl;
         cout << "Wybierz opcje: ";
 
 
@@ -85,7 +86,8 @@ void admin_running() {
                     break;
                 case 6:
                     cout << "Podaj tytul filmu: ";
-                    cin >> client_title;
+                    cin.ignore();
+                    getline(cin, client_title);
                     if (client_title == "exit")
                         return;
                     if(!isValidString(client_title)){
@@ -94,7 +96,53 @@ void admin_running() {
                     }
                     database.ReturnMovie(client_title);
                     break;
+
                 case 7:
+                    system("cls");
+                    cout << " --------------- WYSZUKIWARKA -------------- " << endl;
+                    cout << "Czego szukasz: " << endl;
+                    cout << " > klient " << endl;
+                    cout << " > film " << endl;
+                    cout << "Wybierz opcje: ";
+                    cin.ignore();
+                    getline(cin, category);
+                    if (category == "exit")
+                        return;
+
+                    if(category == "klient") {
+                        cout << "Imie: ";
+                        getline(cin, name_search);
+                        cout << "Nazwisko: ";
+                        getline(cin, surname_search);
+                        if (name_search == "exit" or surname_search == "exit")
+                            return;
+                        if (!isValidString(category) or !isValidString(name_search) or !isValidString(surname_search)) {
+                            throw "Niepoprawny format wpisanych danych sprobuj ponownie.";
+                            break;
+                        }
+                        database.search_client(name_search, surname_search);
+                    }
+                    else if(category == "film") {
+                        cout << "Tytul: ";
+                        getline(cin, title_search);
+                        if (name_search == "exit")
+                            return;
+                        if (!isValidString(category) or !isValidString(name_search)) {
+                            throw "Niepoprawny format wpisanych danych sprobuj ponownie.";
+                            break;
+                        }
+                        database.search_title(title_search);
+                    }
+
+                    else{
+                        throw "Nieznany typ wyszukiwania. Sprobuj ponownie";
+                        break;
+                    }
+                    //Inicjalizacja funkcji szukania
+
+                    break;
+
+                case 8:
                     return;
                 default:
                     cout << "Nieprawidlowa opcja. Wybierz ponownie." << endl;

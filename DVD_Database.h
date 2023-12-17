@@ -40,6 +40,43 @@ public:
         return;
     }
 
+    //Funkcja przeszukuje bazę danych w poszukiwaniu podanego tytułu
+    void search_title(const string& title_search){
+        loadFromFile();
+        bool found_title = false;
+        cout << "Wyniki wyszukiwania: \n" << endl;
+        for (auto it = films.begin(); it != films.end(); ++it) {
+            if (it->get_title() == title_search) {
+                it -> display_admin();
+                found_title = true;
+            }
+        }
+        if(!found_title) {
+            cout << "ERROR: Nie znaleziono filmu\n" << endl;
+            return;
+        }
+        return;
+    }
+
+    //Funkcja szuka w bazie danych czy podana osoba wyporzyczyła jakiś film
+    void search_client(const string& name_search, const string& surname_search) {
+        loadFromFile();
+        bool found_person = false;
+        for (auto it = films.begin(); it != films.end(); ++it) {
+            if (it->get_name() == name_search) {
+                if (it->get_surname() == surname_search) {
+                    it->display_admin();
+                    found_person = true;
+                }
+            }
+        }
+        if (!found_person) {
+            cout << "ERROR: Nie znaleziono osoby\n" << endl;
+            return;
+        }
+        return;
+    }
+
     //Zmienia status filmu z wyporzyczony na dostępny
     void ReturnMovie(const string& ret_title) {
         loadFromFile();
