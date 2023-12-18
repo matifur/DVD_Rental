@@ -13,7 +13,7 @@ int main() {
         cout << "2. GOSC " << endl;
         cout << "3. Wyjscie" << endl;
         cin >> choice;
-        system("cls");
+        system("cls||clear");
         try {
             switch (choice) {
                 case 1:

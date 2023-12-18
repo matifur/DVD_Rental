@@ -25,7 +25,7 @@ void client_running(const string& name, const string& surname, const string& pho
 
         int choice;
         cin >> choice;
-        system("CLS");
+        system("cls||clear");
         try {
             switch (choice) {
                 case 1:

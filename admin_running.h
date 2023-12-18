@@ -31,7 +31,7 @@ void admin_running() {
 
 
         cin >> choice;
-        system("CLS");
+        system("cls||clear");
         try {
             switch (choice) {
                 case 1: {
@@ -133,13 +133,10 @@ void admin_running() {
                         }
                         database.search_title(title_search);
                     }
-
                     else{
                         throw "Nieznany typ wyszukiwania. Sprobuj ponownie";
                         break;
                     }
-                    //Inicjalizacja funkcji szukania
-
                     break;
 
                 case 8:
