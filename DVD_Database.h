@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <algorithm>
 #include "Movie.h"
 #include "RentalRecord.h"
 
@@ -16,6 +17,15 @@ private:
 public:
     DVD_Database(){
         loadFromFile();
+    }
+
+    //Sortuje elementy wektora alfabetycznie według tytułu
+    void sortRentalRecordsByTitle(vector<RentalRecord>& records) {
+        sort(records.begin(), records.end(),
+                  [](const RentalRecord& a, const RentalRecord& b) {
+                      return a.get_title() < b.get_title();
+                  }
+        );
     }
 
     //Pozwala na dodanie filmu do naszej bazy danych
@@ -118,6 +128,7 @@ public:
     //Wyświetla wszystkie filmy z osobami które go wyporzyczyły
     void displayAllMovies() {
         loadFromFile();
+        sortRentalRecordsByTitle(films);
         cout << " --------------- WSZYSTKIE FILMY -------------- \n" << endl;
         for (const RentalRecord& film : films) {
             film.display_admin();
@@ -128,6 +139,7 @@ public:
     //Wyświetla wszystkie dostępne do wyporzyczenia filmy
     void displayAviableMovies() {
         loadFromFile();
+        sortRentalRecordsByTitle(films);
         cout << " --------------- DOSTEPNE FILMY -------------- " << endl;
         cout << "Dane w formacie Tytul, Rezyser, Rok produkcji: \n" << endl;
         for (const RentalRecord& film : films) {
@@ -139,6 +151,7 @@ public:
     //Wyświetla wszystkie wyporzyczone filmy
     void displayNotAviableMovies() {
         loadFromFile();
+        sortRentalRecordsByTitle(films);
         cout << "-------------- NIEDOSTEPNE FILMY ------------" << endl;
         for (const RentalRecord& film : films) {
             film.display_not_available();
