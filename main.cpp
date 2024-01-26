@@ -33,7 +33,7 @@ int main() {
                     getline(cin, telefon);
                     if(telefon == "exit"){return 0;}
 
-                    if (!isValidString(imie) or !isValidString(nazwisko) or !isValidString(telefon)) {
+                    if (!isValidString(imie) || !isValidString(nazwisko) || !isValidString(telefon)) {
                         cerr << "ERROR: Nieproprawny format wpisanych danych, prosze sprobowac ponownie" << endl;
                         break;
                     }

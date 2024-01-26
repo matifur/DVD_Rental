@@ -49,7 +49,7 @@ void admin_running() {
                     cout << "Podaj rok produkcji: ";
                     cin >> year;
 
-                    if (!isValidString(title) or !isValidString(director) or !(year>1888 and year<2050)) {
+                    if (!isValidString(title) || !isValidString(director) || !(year>1888 && year<2050)) {
                         throw "Nieproprawny format wpisanych danych, prosze sprobowac ponownie";
                         break;
                     }
@@ -114,9 +114,9 @@ void admin_running() {
                         getline(cin, name_search);
                         cout << "Nazwisko: ";
                         getline(cin, surname_search);
-                        if (name_search == "exit" or surname_search == "exit")
+                        if (name_search == "exit" || surname_search == "exit")
                             return;
-                        if (!isValidString(category) or !isValidString(name_search) or !isValidString(surname_search)) {
+                        if (!isValidString(category) || !isValidString(name_search) || !isValidString(surname_search)) {
                             throw "Niepoprawny format wpisanych danych sprobuj ponownie.";
                             break;
                         }
@@ -127,7 +127,7 @@ void admin_running() {
                         getline(cin, title_search);
                         if (name_search == "exit")
                             return;
-                        if (!isValidString(category) or !isValidString(name_search)) {
+                        if (!isValidString(category) || !isValidString(name_search)) {
                             throw "Niepoprawny format wpisanych danych sprobuj ponownie.";
                             break;
                         }

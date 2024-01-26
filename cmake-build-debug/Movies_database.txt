@@ -1,7 +1,7 @@
-John_wick,Rezyser_Kozak,2016,1,empty,empty,empty
-Fajny_film,Autor,2010,1,empty,empty,empty
-Kozacki_film,Autor,2010,1,empty,empty,empty
-Diuna,kozak,2019,0,Grzegorz,Braun,555666777
-Baby_Driver,Zajebisty,2016,1,empty,empty,empty
-Bibliografia_Korwina,Korwin,2023,1,empty,empty,empty
-Gasnica,Grzegorz_Braun,2023,0,Grzegorz,Braun,555666777
+Skazani_na_Shawshank,Frank_Darabont,1994,1,empty,empty,empty
+Nietykalni,Olivier_Nakache,2012,1,empty,empty,empty
+Zielona_mila,Frank_Darabont,1999,1,empty,empty,empty
+Ojciec_chrzestny,Francis_Ford_Coppola,1972,1,empty,empty,empty
+Dwunastu_gniewnych_ludzi,Sisney_Lumet,1957,1,empty,empty,empty
+Forrest_Gump,Robert_Zemeckis,1994,0,Mateusz,Furgala,111222333
+Lista_Shindlera,Steven_Spielberg,1993,1,empty,empty,empty

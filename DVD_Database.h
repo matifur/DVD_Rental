@@ -22,9 +22,9 @@ public:
     //Sortuje elementy wektora alfabetycznie według tytułu
     void sortRentalRecordsByTitle(vector<RentalRecord>& records) {
         sort(records.begin(), records.end(),
-                  [](const RentalRecord& a, const RentalRecord& b) {
-                      return a.get_title() < b.get_title();
-                  }
+             [](const RentalRecord& a, const RentalRecord& b) {
+                 return a.get_title() < b.get_title();
+             }
         );
     }
 
@@ -168,7 +168,7 @@ public:
 
         for (const RentalRecord& film : films) {
             file << film.get_title() << ',' << film.get_director() << ',' << film.get_year() << "," << film.get_access()
-                << ","<< film.get_name() << "," << film.get_surname() << "," << film.get_phone() << '\n';
+                 << ","<< film.get_name() << "," << film.get_surname() << "," << film.get_phone() << '\n';
         }
 
         file.close();
